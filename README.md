@@ -11,6 +11,48 @@
 - 모델: MLPClassifier (다층 퍼셉트론)
 - 평가 및 시각화: confusion_matrix
 
+#### 코드 동작
+
+- sklearn의 라이브러리 import
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+```
+- 데이터 로드 후 결측값 처리
+```python
+train_data = pd.read_csv('C:/Users/ASUS/Documents/winequality_train.csv')
+test_data = pd.read_csv('C:/Users/ASUS/Documents/winequality_test.csv')
+train_data = train_data.dropna()
+test_data = test_data.dropna()
+```
+
+- 문자열을 숫자로 변환, 데이터 분
+```python
+train_data['type'] = train_data['type'].map({'white': 0, 'red': 1})
+test_data['type'] = test_data['type'].map({'white': 0, 'red': 1})
+X_train = train_data.drop(['quality'], axis=1)
+y_train = train_data['quality']
+X_test = test_data.drop(['quality'], axis=1)
+y_test = test_data['quality']
+```
+- MLP 모델 생성 및 학습 : 00개의 뉴런을 포함하는 하나의 은닉층과 최대 500번의 반복 훈련이 있는 MLP 모델을 생성
+```python
+mlp = MLPClassifier(hidden_layer_sizes=(100,), max_iter=500)
+mlp.fit(X_train, y_train)
+```
+
+- 모델 평가 
+```python
+print('Accuracy:', mlp.score(X_test[:1000], y_test[:1000]))
+accuracy = mlp.score(X_test[:1000], y_test[:1000])
+print('Accuracy: {:.2f}%'.format(accuracy * 100))
+y_pred = mlp.predict(X_test[:1000])
+cm = confusion_matrix(y_test[:1000], y_pred)
+print('Confusion Matrix:\n', cm)
+```
+
 ## 인공지능 기말과제
 인공지능 수업의 기말 과제로 꽃 이미지를 분류하는 인공지능 모델을 만들었습니다.
 
