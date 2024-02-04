@@ -71,4 +71,4 @@ cnn.save("/content/saved_model.h5")
 loaded_model = load_model("/content/saved_model.h5")
 ```
 
-- 위 모델의 정확률은 91%입니다.
+- 위 모델의 정확률은 86%입니다.
