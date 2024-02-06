@@ -37,7 +37,7 @@ y_train = train_data['quality']
 X_test = test_data.drop(['quality'], axis=1)
 y_test = test_data['quality']
 ```
-- MLP 모델 생성 및 학습 : 00개의 뉴런을 포함하는 하나의 은닉층과 최대 500번의 반복 훈련이 있는 MLP 모델을 생성
+- MLP 모델 생성 및 학습 : 100개의 뉴런을 포함하는 하나의 은닉층과 최대 500번의 반복 훈련이 있는 MLP 모델을 생성
 ```python
 mlp = MLPClassifier(hidden_layer_sizes=(100,), max_iter=500)
 mlp.fit(X_train, y_train)
